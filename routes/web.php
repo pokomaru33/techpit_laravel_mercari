@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Mypage\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('top');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::prefix('mypage')
+    ->middleware('auth')
+    ->group(function(){
+        Route::get('edit-profile', [ProfileController::class, 'showProfileEditForm'])->name('mypage.edit-profile');
+        Route::post('edit-profile', [ProfileController::class, 'editProfile'])->name('mypage.edit-profile');
+    });
