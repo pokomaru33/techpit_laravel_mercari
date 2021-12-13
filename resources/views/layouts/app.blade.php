@@ -27,6 +27,7 @@
                 @yield('content')
             </main>
         </x-header>
+        @yield('content')
     </div>
 </body>
 </html>
