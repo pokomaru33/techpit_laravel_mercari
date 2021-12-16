@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Mypage\ProfileController;
 use App\Http\Controllers\Mypage\SoldItemsController;
+use App\Http\Controllers\Mypage\BoughtItemsController;
 use App\Http\Controllers\SellController;
 
 /*
@@ -20,7 +21,6 @@ Route::get('/', [App\Http\Controllers\ItemsController::class, 'showItems'])->nam
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('items/{item}', [App\Http\Controllers\ItemsController::class, 'showItemDetail'])->name('item');
 
 Route::prefix('mypage')
@@ -29,13 +29,15 @@ Route::prefix('mypage')
         Route::get('edit-profile', [ProfileController::class, 'showProfileEditForm'])->name('mypage.edit-profile');
         Route::post('edit-profile', [ProfileController::class, 'editProfile'])->name('mypage.edit-profile');
 
+        Route::get('bought-items', [BoughtItemsController::class, 'showBoughtItems'])->name('mypage.bought-items');
+
         Route::get('sold-items', [SoldItemsController::class, 'showSoldItems'])->name('mypage.sold-items');
     });
 
 Route::middleware('auth')
     ->group(function(){
-        Route::get('items/{item}/buy', function () { return "商品購入画面";})->name('item.buy');
-
+        Route::get('items/{item}/buy', [App\Http\Controllers\ItemsController::class, 'showBuyItemForm'])->name('item.buy');
+        Route::post('items/{item}/buy', [App\Http\Controllers\ItemsController::class, 'buyItem'])->name('item.buy');
         
         Route::get('sell', [SellController::class, 'showSellForm'])->name('sell');
         Route::post('sell', [SellController::class, 'sellItem'])->name('sell');
