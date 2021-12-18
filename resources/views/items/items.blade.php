@@ -36,6 +36,8 @@
     </div>
 </div>
 
+<example-component></example-component>
+
 <a href="{{route('sell')}}"
    class="bg-secondary text-white d-inline-block d-flex justify-content-center align-items-center flex-column"
    role="button"
