@@ -5,6 +5,7 @@ use App\Http\Controllers\Mypage\ProfileController;
 use App\Http\Controllers\Mypage\SoldItemsController;
 use App\Http\Controllers\Mypage\BoughtItemsController;
 use App\Http\Controllers\SellController;
+use App\Http\Controllers\PdfController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,4 +42,7 @@ Route::middleware('auth')
         
         Route::get('sell', [SellController::class, 'showSellForm'])->name('sell');
         Route::post('sell', [SellController::class, 'sellItem'])->name('sell');
+
+        Route::get('/pdf/dl', [PdfController::class, 'index'])->name('pdf.dl');
+        Route::get('/pdf/view', [PdfController::class, 'view'])->name('pdf.view');
     });

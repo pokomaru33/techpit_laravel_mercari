@@ -12,7 +12,7 @@
             <div class="col-10 offset-1 bg-white">
 
                 <div class="font-weight-bold text-center border-bottom pb-3 pt-3" style="font-size: 24px">購入した商品</div>
-
+                <div><a href="{{route('pdf.view')}}">PDFダウンロード</a></div>
                 @foreach ($items as $item)
                     <div class="d-flex mt-3 border position-relative">
                         <div>
